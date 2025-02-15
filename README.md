@@ -97,4 +97,4 @@ X-Response: {"ip":"::1"}
 Note: The actual behavior of CONNECT may vary depending on your environment and curl version.
 
 ## License
-This project is open source and available under the MIT License.
+This project is open source and available under the [MIT](LICENSE) License.
