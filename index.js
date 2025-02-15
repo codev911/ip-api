@@ -26,7 +26,10 @@ const server = http.createServer((req, res) => {
 // but here we simply return a header-only response.
 server.on('connect', (req, clientSocket, head) => {
   // Extract IP using clientSocket since no 'res' object is provided.
-  const ip = req.headers['x-forwarded-for'] || clientSocket.remoteAddress;
+  let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  if (ip && ip.includes(',')) {
+    ip = ip.split(',')[0].trim();
+  }
   const responseBody = { ip };
 
   // Build the response headers.
