@@ -3,7 +3,10 @@ const http = require('http');
 // Standard HTTP request handling (GET, HEAD, POST, etc.)
 const server = http.createServer((req, res) => {
   // Extract the client's IP address from the header or socket
-  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  if (ip && ip.includes(',')) {
+    ip = ip.split(',')[0].trim();
+  }
   const responseBody = { ip };
 
   // Set response headers
